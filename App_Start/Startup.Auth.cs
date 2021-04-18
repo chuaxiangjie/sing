@@ -39,9 +39,11 @@ namespace sing
                  
                  Authority = "https://accounts.google.com",
                  ClientSecret = "6ic7_wG1O9_7yoM0tV-yEFrx",
-                 RedirectUri = "https://localhost:44312/",
+                 RedirectUri = "https://localhost:44312",
                  Scope = OpenIdConnectScope.OpenIdProfile,
-                 
+                 AuthenticationMode = AuthenticationMode.Active,
+                 RedeemCode = true,
+                 SaveTokens = true,
                 // ResponseType is set to request the code id_token - which contains basic information about the signed-in user
                 ResponseType = OpenIdConnectResponseType.Code,
                 // ValidateIssuer set to false to allow personal and work accounts from any organization to sign in to your application
@@ -51,6 +53,7 @@ namespace sing
                  {
                      ValidateIssuer = false // This is a simplification
                 },
+           
                 // OpenIdConnectAuthenticationNotifications configures OWIN to send notification of failed authentications to OnAuthenticationFailed method
                 Notifications = new OpenIdConnectAuthenticationNotifications
                  {
@@ -58,6 +61,11 @@ namespace sing
                  }
              }
          );
+
+
+            app.UseGoogleAuthentication(
+        clientId: "759634598595-qhvii1hl33c885o9cedta8k64p6ghojc.apps.googleusercontent.com",
+        clientSecret: "6ic7_wG1O9_7yoM0tV-yEFrx");
         }
 
         /// <summary>

@@ -12,6 +12,12 @@ namespace sing.Controllers
     {
         public ActionResult Index()
         {
+            var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
+
+            //You get the user's first and last name below:
+            
+            ViewBag.Name = userClaims?.FindFirst("name")?.Value;
+
             return View();
         }
 
